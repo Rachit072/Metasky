@@ -5,8 +5,12 @@ import { RootState } from '../redux/store';
 const UsersTable: React.FC = () => {
   const users = useSelector((state: RootState) => state.users);
   const [searchTerm, setSearchTerm] = useState('');
+  interface User {
+    id: number;
+    name: string;
 
-  const filteredUsers = users.filter((user: { name: string; }) => user.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  }
+  const filteredUsers = users.filter((user: User) => user.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
     <div>
@@ -26,7 +30,7 @@ const UsersTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredUsers.map((user) => (
+          {filteredUsers.map((user:User) => (
             <tr key={user.id}>
               <td>{user.id}</td>
               <td>{user.name}</td>
